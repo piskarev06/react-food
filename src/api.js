@@ -5,7 +5,7 @@ export const getMealById = async (mealId) => {
   return await res.json()
 }
 
-export const getAllCategories = async (mealId) => {
+export const getAllCategories = async () => {
   const res = await fetch(API_URL + 'categories.php')
   return await res.json()
 }

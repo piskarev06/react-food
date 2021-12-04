@@ -1,16 +1,19 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 
+import { getFilteredCategory } from '../api'
+import { Preloader } from '../components/ui/Preloader'
+import { MealList } from '../components/MealList'
+
 export const Category = () => {
-  const { id } = useParams()
+  const { name } = useParams()
+  const [meals, setMeals] = useState([])
   const navigate = useNavigate()
   console.log(navigate)
-  return (
-    <>
-      <h1>Category number {id}</h1>
-      <button onClick={() => navigate('/')} className="btn">
-        Go back
-      </button>
-    </>
-  )
+
+  useEffect(() => {
+    getFilteredCategory(name).then((data) => setMeals(data.meals))
+  }, [name])
+
+  return <>{!meals.length ? <Preloader /> : <MealList meals={meals} />}</>
 }
