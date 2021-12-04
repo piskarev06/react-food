@@ -60,7 +60,7 @@ export const Recipe = () => {
         </div>
       )}
 
-      <button onClick={() => navigate('/')} className="btn">
+      <button onClick={() => navigate(-1)} className="btn">
         Go Back
       </button>
     </>

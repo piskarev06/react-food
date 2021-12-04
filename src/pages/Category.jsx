@@ -16,7 +16,7 @@ export const Category = () => {
 
   return (
     <>
-      <button onClick={() => navigate('/')} className="btn">
+      <button onClick={() => navigate(-1)} className="btn">
         Go Back
       </button>
       {!meals.length ? <Preloader /> : <MealList meals={meals} />}

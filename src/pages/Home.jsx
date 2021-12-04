@@ -10,16 +10,18 @@ export const Home = () => {
   const [catalog, setCatalog] = useState([])
   const [filteredCatalog, setFilteredCatalog] = useState([])
 
-  const [pathname, search] = useLocation()
+  const { pathname, search } = useLocation()
+
+  const navigate = useNavigate()
 
   const handleSearch = (str) => {
     setFilteredCatalog(
       catalog.filter((el) => el.strCategory.toLowerCase().includes(str.toLowerCase())),
     )
-    // push({
-    //   pathname,
-    //   search: `?search=${str}`,
-    // })
+    navigate({
+      pathname,
+      search: `?search=${str}`,
+    })
   }
 
   useEffect(() => {
