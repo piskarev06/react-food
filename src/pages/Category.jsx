@@ -6,14 +6,20 @@ import { Preloader } from '../components/ui/Preloader'
 import { MealList } from '../components/MealList'
 
 export const Category = () => {
+  const navigate = useNavigate()
   const { name } = useParams()
   const [meals, setMeals] = useState([])
-  const navigate = useNavigate()
-  console.log(navigate)
 
   useEffect(() => {
     getFilteredCategory(name).then((data) => setMeals(data.meals))
   }, [name])
 
-  return <>{!meals.length ? <Preloader /> : <MealList meals={meals} />}</>
+  return (
+    <>
+      <button onClick={() => navigate('/')} className="btn">
+        Go Back
+      </button>
+      {!meals.length ? <Preloader /> : <MealList meals={meals} />}
+    </>
+  )
 }
