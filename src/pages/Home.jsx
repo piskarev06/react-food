@@ -3,16 +3,42 @@ import { getAllCategories } from '../api'
 
 import { Preloader } from '../components/ui/Preloader'
 import { CategoryList } from '../components/CategoryList'
+import { Search } from '../components/Search'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 export const Home = () => {
   const [catalog, setCatalog] = useState([])
+  const [filteredCatalog, setFilteredCatalog] = useState([])
+
+  const [pathname, search] = useLocation()
+
+  const handleSearch = (str) => {
+    setFilteredCatalog(
+      catalog.filter((el) => el.strCategory.toLowerCase().includes(str.toLowerCase())),
+    )
+    // push({
+    //   pathname,
+    //   search: `?search=${str}`,
+    // })
+  }
 
   useEffect(() => {
     getAllCategories().then((data) => {
       setCatalog(data.categories)
-      console.log(data, data.categories)
+      setFilteredCatalog(
+        search
+          ? data.categories.filter((el) =>
+              el.strCategory.toLowerCase().includes(search.split('=')[1].toLowerCase()),
+            )
+          : data.categories,
+      )
     })
-  }, [])
+  }, [search])
 
-  return <>{!catalog.length ? <Preloader /> : <CategoryList catalog={catalog} />}</>
+  return (
+    <>
+      <Search cb={handleSearch} />
+      {!catalog.length ? <Preloader /> : <CategoryList catalog={filteredCatalog} />}
+    </>
+  )
 }
