@@ -5,6 +5,7 @@ import { Preloader } from './components/ui/Preloader'
 import { Footer } from './components/ui/Footer'
 import { Home } from './pages/Home'
 import { NotFound } from './pages/NotFound'
+import { Category } from './pages/Category'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <main className="container content">
         <Routes>
           <Route path="/" element={<Home />}></Route>
+          <Route path="/category/:id" element={<Category />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </main>
