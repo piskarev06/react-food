@@ -24,14 +24,7 @@ export function Search({ cb = Function.prototype }) {
           onChange={(e) => setValue(e.target.value)}
           value={value}
         />
-        <button
-          className="btn"
-          style={{
-            position: 'absolute',
-            top: 0,
-            right: 0,
-          }}
-          onClick={handleSubmit}>
+        <button className="btn search-btn" onClick={handleSubmit}>
           Search
         </button>
       </div>

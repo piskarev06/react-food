@@ -32,7 +32,7 @@ export const Home = () => {
           ? data.categories.filter((el) =>
               el.strCategory.toLowerCase().includes(search.split('=')[1].toLowerCase()),
             )
-          : data.categories,
+          : null,
       )
     })
   }, [search])
@@ -40,7 +40,7 @@ export const Home = () => {
   return (
     <>
       <Search cb={handleSearch} />
-      {!catalog.length ? <Preloader /> : <CategoryList catalog={filteredCatalog} />}
+      {!catalog.length ? <Preloader /> : <CategoryList catalog={filteredCatalog || catalog} />}
     </>
   )
 }
